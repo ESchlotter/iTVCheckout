@@ -45,8 +45,8 @@ public class CheckoutService {
             String sku = item.getSKU();
             Double count = Double.valueOf(1);
             if (itemCount.containsKey(sku)) {
-                count = itemCount.get(sku);
-                itemCount.put(sku, count++);
+                count = itemCount.get(sku) + Double.valueOf(1);
+                itemCount.put(sku, count);
             } else {
                 itemCount.put(sku, count);
             }
