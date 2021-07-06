@@ -3,10 +3,12 @@ package service;
 import exceptions.ItemException;
 import model.Price;
 import model.PricePair;
+import model.PricedItem;
 import model.SpecialPrice;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -34,5 +36,11 @@ public class PriceService {
             throw new ItemException("SKU doesn't exist.");
         }
         return prices.get(sku).getPrice();
+    }
+
+    public void setPrices(List<PricedItem> newPricedItems) {
+        for (PricedItem pricedItem : newPricedItems) {
+            prices.put(pricedItem.getSKU(),  new PricePair (pricedItem.getPrice(), pricedItem.getSpecialPrice()));
+        }
     }
 }

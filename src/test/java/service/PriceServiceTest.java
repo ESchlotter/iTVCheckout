@@ -2,9 +2,13 @@ package service;
 
 import exceptions.ItemException;
 import model.Price;
+import model.PricedItem;
 import model.SpecialPrice;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
@@ -42,4 +46,18 @@ public class PriceServiceTest {
         assertThrows(ItemException.class, () -> priceService.getPrice(null));
     }
 
+    @Test
+    public void setNewPrices() {
+        List<PricedItem> pricedItemList = new ArrayList<>();
+        pricedItemList.add(new PricedItem("A", new Price(Double.valueOf(2))));
+        priceService.setPrices(pricedItemList);
+
+        Price result = priceService.getPrice("A");
+        assertEquals(Double.valueOf(2), result.getPrice());
+    }
+
+    @Test
+    public void setNewPricesNull() {
+        assertThrows(NullPointerException.class, () -> priceService.setPrices(null));
+    }
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import service.CheckoutService;
+import service.PriceService;
 
 import java.util.List;
 
@@ -17,10 +18,11 @@ import java.util.List;
 public class CheckoutController {
 
     private final CheckoutService checkoutService;
+    private final PriceService priceService;
 
     @PostMapping(path = "/newprice")
     public void setNewPricedItems(@RequestBody List<PricedItem> newPricedItems) {
-        //code
+        priceService.setPrices(newPricedItems);
     }
 
     @GetMapping
